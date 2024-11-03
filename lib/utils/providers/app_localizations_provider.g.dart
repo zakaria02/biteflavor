@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'posts_repository.dart';
+part of 'app_localizations_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$postsRepositoryHash() => r'71bd9b61de4b66af98f6d5899d1854965b5ec9ba';
+String _$appLocalizationsHash() => r'b986140e3c4b24f768ab0decca2186739b122a63';
 
-/// See also [PostsRepository].
-@ProviderFor(PostsRepository)
-final postsRepositoryProvider =
-    NotifierProvider<PostsRepository, PostsApi>.internal(
-  PostsRepository.new,
-  name: r'postsRepositoryProvider',
+/// See also [appLocalizations].
+@ProviderFor(appLocalizations)
+final appLocalizationsProvider = Provider<AppLocalizations>.internal(
+  appLocalizations,
+  name: r'appLocalizationsProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$postsRepositoryHash,
+      : _$appLocalizationsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$PostsRepository = Notifier<PostsApi>;
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AppLocalizationsRef = ProviderRef<AppLocalizations>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

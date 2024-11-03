@@ -1,8 +1,8 @@
 import 'package:biteflavor/utils/extensios/context_extension.dart';
 import 'package:biteflavor/utils/constant/app_colors.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class SearchTextfield extends StatelessWidget {
   const SearchTextfield({super.key});
@@ -19,7 +19,7 @@ class SearchTextfield extends StatelessWidget {
             color: Colors.grey,
           ),
           prefixIcon: const Icon(
-            EvaIcons.searchOutline,
+            EvaIcons.search_outline,
             color: Colors.grey,
           ),
           border: OutlineInputBorder(

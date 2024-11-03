@@ -40,7 +40,6 @@ dependencies:
   go_router: ^14.3.0
   flutter_riverpod: ^2.6.1
   google_fonts: ^6.2.1
-  eva_icons_flutter: ^3.1.0 #https://akveo.github.io/eva-icons/#/
   intl: ^0.19.0
   hooks_riverpod: ^2.6.1
   riverpod_annotation: ^2.6.1
@@ -54,6 +53,11 @@ dependencies:
   dots_indicator: ^3.0.0
   flutter_launcher_icons: ^0.14.1
   flutter_native_splash: ^2.4.2
+  icons_plus: ^5.0.0
+  connectivity_plus: ^6.1.0
+  flutter_widget_from_html: ^0.15.2
+  toastification: ^2.3.0
+  share_plus: ^10.1.1
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +74,7 @@ dev_dependencies:
   build_runner: ^2.4.13
   json_serializable: ^6.8.0
   freezed: ^2.5.7
+  go_router_builder: ^2.7.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

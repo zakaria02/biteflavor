@@ -14,6 +14,7 @@ class Post with _$Post {
     ArticleContent? content,
     int? author,
     DateTime? date,
+    String? link,
   }) = _Post;
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);

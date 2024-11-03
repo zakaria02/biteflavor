@@ -2,8 +2,8 @@ import 'package:biteflavor/utils/constant/app_colors.dart';
 import 'package:biteflavor/utils/constant/app_images.dart';
 import 'package:biteflavor/utils/constant/app_styles.dart';
 import 'package:biteflavor/utils/constant/app_texts.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
@@ -11,7 +11,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -44,7 +44,7 @@ class CustomAppBar extends StatelessWidget {
                 ),
               ),
               child: const Icon(
-                EvaIcons.bellOutline,
+                EvaIcons.bell_outline,
               ),
             ),
           )

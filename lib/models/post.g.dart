@@ -24,6 +24,7 @@ _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
       author: (json['author'] as num?)?.toInt(),
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
+      link: json['link'] as String?,
     );
 
 Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
@@ -35,6 +36,7 @@ Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
       'content': instance.content,
       'author': instance.author,
       'date': instance.date?.toIso8601String(),
+      'link': instance.link,
     };
 
 _$ArticleTitleImpl _$$ArticleTitleImplFromJson(Map<String, dynamic> json) =>

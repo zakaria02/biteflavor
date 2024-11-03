@@ -11,5 +11,25 @@
     "seeMore": "See More",
     "@seeMore": {},
     "latest": "Latest",
-    "@latest": {}
+    "@latest": {},
+    "home": "Home",
+    "@home": {},
+    "search": "Search",
+    "@search": {},
+    "favorites": "Favorites",
+    "@favorites": {},
+    "settings": "Settings",
+    "@settings": {},
+    "noInternet": "Something went wrong. Try checking your internet connection.\nWe'll see you in a moment",
+    "@noInternet": {},
+    "goToFavorites": "Go to favorites",
+    "@goToFavorites": {},
+    "defaultError": "An error has occurred, please try again later. If the problem persists, please contact us.",
+    "@defaultError": {},
+    "shareArticle": "Check out this new recipe! 🍲 {url}",
+    "@shareArticle": {
+        "placeholders": {
+            "url": {}
+        }
+    }
 }

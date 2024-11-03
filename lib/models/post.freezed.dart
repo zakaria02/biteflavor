@@ -28,6 +28,7 @@ mixin _$Post {
   ArticleContent? get content => throw _privateConstructorUsedError;
   int? get author => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
+  String? get link => throw _privateConstructorUsedError;
 
   /// Serializes this Post to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,7 +51,8 @@ abstract class $PostCopyWith<$Res> {
       PostPictures? uagb_featured_image_src,
       ArticleContent? content,
       int? author,
-      DateTime? date});
+      DateTime? date,
+      String? link});
 
   $ArticleTitleCopyWith<$Res>? get title;
   $PostPicturesCopyWith<$Res>? get uagb_featured_image_src;
@@ -79,6 +81,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? content = freezed,
     Object? author = freezed,
     Object? date = freezed,
+    Object? link = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -109,6 +112,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      link: freezed == link
+          ? _value.link
+          : link // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -170,7 +177,8 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
       PostPictures? uagb_featured_image_src,
       ArticleContent? content,
       int? author,
-      DateTime? date});
+      DateTime? date,
+      String? link});
 
   @override
   $ArticleTitleCopyWith<$Res>? get title;
@@ -199,6 +207,7 @@ class __$$PostImplCopyWithImpl<$Res>
     Object? content = freezed,
     Object? author = freezed,
     Object? date = freezed,
+    Object? link = freezed,
   }) {
     return _then(_$PostImpl(
       id: freezed == id
@@ -229,6 +238,10 @@ class __$$PostImplCopyWithImpl<$Res>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      link: freezed == link
+          ? _value.link
+          : link // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -243,7 +256,8 @@ class _$PostImpl extends _Post {
       this.uagb_featured_image_src,
       this.content,
       this.author,
-      this.date})
+      this.date,
+      this.link})
       : _categories = categories,
         super._();
 
@@ -272,10 +286,12 @@ class _$PostImpl extends _Post {
   final int? author;
   @override
   final DateTime? date;
+  @override
+  final String? link;
 
   @override
   String toString() {
-    return 'Post(id: $id, title: $title, categories: $categories, uagb_featured_image_src: $uagb_featured_image_src, content: $content, author: $author, date: $date)';
+    return 'Post(id: $id, title: $title, categories: $categories, uagb_featured_image_src: $uagb_featured_image_src, content: $content, author: $author, date: $date, link: $link)';
   }
 
   @override
@@ -292,7 +308,8 @@ class _$PostImpl extends _Post {
                 other.uagb_featured_image_src == uagb_featured_image_src) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.author, author) || other.author == author) &&
-            (identical(other.date, date) || other.date == date));
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.link, link) || other.link == link));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -305,7 +322,8 @@ class _$PostImpl extends _Post {
       uagb_featured_image_src,
       content,
       author,
-      date);
+      date,
+      link);
 
   /// Create a copy of Post
   /// with the given fields replaced by the non-null parameter values.
@@ -331,7 +349,8 @@ abstract class _Post extends Post {
       final PostPictures? uagb_featured_image_src,
       final ArticleContent? content,
       final int? author,
-      final DateTime? date}) = _$PostImpl;
+      final DateTime? date,
+      final String? link}) = _$PostImpl;
   const _Post._() : super._();
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$PostImpl.fromJson;
@@ -350,6 +369,8 @@ abstract class _Post extends Post {
   int? get author;
   @override
   DateTime? get date;
+  @override
+  String? get link;
 
   /// Create a copy of Post
   /// with the given fields replaced by the non-null parameter values.

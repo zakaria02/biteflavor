@@ -1,7 +1,6 @@
 import 'package:biteflavor/presentation/home/widgets/post_display.dart';
 import 'package:biteflavor/uios/post_uio.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
 class PostsCarouselSlider extends StatefulWidget {
@@ -50,17 +49,6 @@ class _PostsCarouselSliderState extends State<PostsCarouselSlider> {
               },
             ),
           ),
-          DotsIndicator(
-            dotsCount: widget.posts.length,
-            position: currentIndex,
-            decorator: DotsDecorator(
-              activeSize: const Size(20, 10),
-              activeColor: Colors.grey[400]!,
-              color: Colors.grey[300]!,
-              activeShape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12))),
-            ),
-          )
         ],
       ),
     );

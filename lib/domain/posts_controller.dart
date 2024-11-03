@@ -5,6 +5,7 @@ import 'package:biteflavor/models/author.dart';
 import 'package:biteflavor/models/category.dart';
 import 'package:biteflavor/models/post.dart';
 import 'package:biteflavor/uios/post_uio.dart';
+import 'package:biteflavor/utils/widgets/error_toast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:collection/collection.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -45,6 +46,7 @@ Future<List<PostUio>> posts(Ref ref, {int? categoryId, int count = 5}) async {
             ))
         .toList();
   } catch (e) {
+    ErrorToast.showToast(message: e.toString());
     return [];
   }
 }
@@ -65,22 +67,58 @@ Future<List<PostUio>> latest(Ref ref) async {
     }
     List<Category> categories = ref.watch(categoriesProvider).value ?? [];
     return posts
-        .map((post) => PostUio(
-              id: post.id,
-              title: post.title?.rendered,
-              htmlContent: post.content?.rendered,
-              categories: categories
-                  .where((category) =>
-                      (post.categories ?? []).contains(category.id ?? 0))
-                  .toList(),
-              picture: post.uagb_featured_image_src?.large?.first.toString(),
-              date: post.date,
-              author: authors
-                  .firstWhereOrNull((author) => author.id == post.author)
-                  ?.toAuthorUio(),
-            ))
+        .map(
+          (post) => PostUio(
+            id: post.id,
+            title: post.title?.rendered,
+            htmlContent: post.content?.rendered,
+            categories: categories
+                .where((category) =>
+                    (post.categories ?? []).contains(category.id ?? 0))
+                .toList(),
+            picture: post.uagb_featured_image_src?.large?.first.toString(),
+            date: post.date,
+            author: authors
+                .firstWhereOrNull((author) => author.id == post.author)
+                ?.toAuthorUio(),
+            link: post.link,
+          ),
+        )
         .toList();
   } catch (e) {
+    ErrorToast.showToast(message: e.toString());
     return [];
+  }
+}
+
+@riverpod
+Future<PostUio?> postDetails(Ref ref, {required int postId}) async {
+  try {
+    Author? author;
+    Post post = await ref
+        .watch(postsRepositoryProvider)
+        .fetchPostDetails(postId: postId);
+    if (post.author != null) {
+      author = await ref
+          .read(authorRepositoryProvider)
+          .fetchAuthor(id: post.author!);
+    }
+    List<Category> categories = ref.watch(categoriesProvider).value ?? [];
+    return PostUio(
+      id: post.id,
+      title: post.title?.rendered,
+      htmlContent: post.content?.rendered,
+      categories: categories
+          .where(
+              (category) => (post.categories ?? []).contains(category.id ?? 0))
+          .toList(),
+      picture: post.uagb_featured_image_src?.large?.first.toString(),
+      date: post.date,
+      author: author?.toAuthorUio(),
+      link: post.link,
+    );
+  } catch (e) {
+    ErrorToast.showToast(message: e.toString());
+    return null;
   }
 }
