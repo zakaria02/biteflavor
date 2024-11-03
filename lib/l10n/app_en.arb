@@ -1,0 +1,15 @@
+{
+    "@@locale": "en",
+    "findAnArticle": "Find an article",
+    "@findAnArticle": {},
+    "categoryArticles": "{category} articles",
+    "@categoryArticles": {
+        "placeholders": {
+            "category": {}
+        }
+    },
+    "seeMore": "See More",
+    "@seeMore": {},
+    "latest": "Latest",
+    "@latest": {}
+}
