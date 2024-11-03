@@ -31,5 +31,21 @@
         "placeholders": {
             "url": {}
         }
-    }
+    },
+    "aboutUs": "About us",
+    "@aboutUs": {},
+    "contactUs": "Contact us",
+    "@contactUs": {},
+    "privacyPolicy": "Privacy policy",
+    "@privacyPolicy": {},
+    "termsOfService": "Terms of service",
+    "@termsOfService": {},
+    "ourLinks": "Our links",
+    "@ourLinks": {},
+    "ourSocialMedia": "Our social media",
+    "@ourSocialMedia": {},
+    "rateApp": "Rate our app",
+    "@rateApp": {},
+    "notifications": "Notifications",
+    "@notifications": {}
 }

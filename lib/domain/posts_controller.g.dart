@@ -173,7 +173,7 @@ class _PostsProviderElement extends FutureProviderElement<List<PostUio>>
   int get count => (origin as PostsProvider).count;
 }
 
-String _$latestHash() => r'c0335fe4afe3296b9ba62602ac2f8b4592452236';
+String _$latestHash() => r'c5b738e630c00e6b2d4a03524f3dfb35a518f8d1';
 
 /// See also [latest].
 @ProviderFor(latest)
@@ -189,7 +189,7 @@ final latestProvider = FutureProvider<List<PostUio>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef LatestRef = FutureProviderRef<List<PostUio>>;
-String _$postDetailsHash() => r'f17608e92106eaf3bbdf82bcbe0b509b8494eaf4';
+String _$postDetailsHash() => r'7cc8d46f994f08092d90d45d0a006c4a25e05a14';
 
 /// See also [postDetails].
 @ProviderFor(postDetails)

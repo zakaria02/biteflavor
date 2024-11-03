@@ -1,6 +1,7 @@
 import 'package:biteflavor/presentation/home/home_page.dart';
 import 'package:biteflavor/presentation/main_page.dart';
 import 'package:biteflavor/presentation/post/post_details_page.dart';
+import 'package:biteflavor/presentation/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -130,7 +131,7 @@ class SettingsRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return const NoTransitionPage(child: Scaffold());
+    return const NoTransitionPage(child: SettingsPage());
   }
 }
 
