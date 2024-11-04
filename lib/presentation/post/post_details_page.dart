@@ -1,7 +1,9 @@
+import 'package:biteflavor/domain/favorites_conrtoller.dart';
 import 'package:biteflavor/domain/posts_controller.dart';
 import 'package:biteflavor/presentation/post/widget/post_details_view.dart';
 import 'package:biteflavor/uios/post_uio.dart';
 import 'package:biteflavor/utils/extensios/context_extension.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -9,14 +11,31 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class PostDetailsPage extends ConsumerWidget {
+class PostDetailsPage extends ConsumerStatefulWidget {
   const PostDetailsPage({super.key, required this.postId});
 
   final int postId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(postDetailsProvider(postId: postId));
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _PostDetailsPageState();
+}
+
+class _PostDetailsPageState extends ConsumerState<PostDetailsPage> {
+  bool isFavorite = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final state = ref.watch(postDetailsProvider(postId: widget.postId));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final favorites = ref.watch(favoritesProvider).value ?? [];
+      setState(() {
+        isFavorite =
+            favorites.firstWhereOrNull((post) => post.id == state.value?.id) !=
+                null;
+      });
+    });
+
     return Column(
       children: [
         Padding(
@@ -32,9 +51,23 @@ class PostDetailsPage extends ConsumerWidget {
               ),
               const Spacer(),
               IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Bootstrap.bookmark_plus,
+                onPressed: state.value != null
+                    ? () {
+                        if (isFavorite) {
+                          ref
+                              .read(favoritesProvider.notifier)
+                              .removePostFromFavorites(state.value!);
+                        } else {
+                          ref
+                              .read(favoritesProvider.notifier)
+                              .addPostToFavorites(state.value!);
+                        }
+                      }
+                    : null,
+                icon: Icon(
+                  isFavorite
+                      ? Bootstrap.bookmark_plus_fill
+                      : Bootstrap.bookmark_plus,
                   size: 28,
                 ),
               ),

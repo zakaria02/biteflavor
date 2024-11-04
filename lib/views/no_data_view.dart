@@ -4,8 +4,8 @@ import 'package:biteflavor/utils/providers/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class NoInternetView extends StatelessWidget {
-  const NoInternetView({super.key});
+class NoDataView extends StatelessWidget {
+  const NoDataView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,25 +17,20 @@ class NoInternetView extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 25),
           child: Image.asset(
-            AppImages.noInternet,
+            AppImages.noData,
             height: 320,
           ),
         ),
-        Text(
-          "OUPS !",
-          style: GoogleFonts.quicksand(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            context.l10n.noFavorites,
+            style: GoogleFonts.quicksand(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+            textAlign: TextAlign.center,
           ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          context.l10n.noInternet,
-          style: GoogleFonts.quicksand(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
-          textAlign: TextAlign.center,
         ),
         const SizedBox(height: 24),
         Container(
@@ -45,7 +40,7 @@ class NoInternetView extends StatelessWidget {
             horizontal: 24,
           ),
           child: ElevatedButton(
-            onPressed: () => const FavoriteRoute().go(context),
+            onPressed: () => const HomeRoute().go(context),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black87,
               foregroundColor: Colors.white,
@@ -60,7 +55,7 @@ class NoInternetView extends StatelessWidget {
               ),
             ),
             child: Text(
-              context.l10n.goToFavorites,
+              context.l10n.seePosts,
             ),
           ),
         )

@@ -1,11 +1,11 @@
 import 'package:biteflavor/domain/categories_controller.dart';
-import 'package:biteflavor/models/category.dart';
+import 'package:biteflavor/uios/category_uio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CategorySelector extends ConsumerWidget {
-  final Category category;
+  final CategoryUio category;
   final bool isSelected;
 
   const CategorySelector(

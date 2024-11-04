@@ -1,3 +1,4 @@
+import 'package:biteflavor/presentation/favorites/favorites_page.dart';
 import 'package:biteflavor/presentation/home/home_page.dart';
 import 'package:biteflavor/presentation/main_page.dart';
 import 'package:biteflavor/presentation/post/post_details_page.dart';
@@ -115,7 +116,7 @@ class FavoriteRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return const NoTransitionPage(child: Scaffold());
+    return const NoTransitionPage(child: FavoritesPage());
   }
 }
 

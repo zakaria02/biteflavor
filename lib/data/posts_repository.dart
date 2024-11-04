@@ -1,7 +1,10 @@
 import 'package:biteflavor/models/post.dart';
+import 'package:biteflavor/uios/post_uio.dart';
 import 'package:biteflavor/utils/providers/app_localizations_provider.dart';
 import 'package:biteflavor/utils/providers/client_provider.dart';
+import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -14,6 +17,7 @@ class PostsRepository extends _$PostsRepository {
     return PostsApi(
       ref.watch(clientProvider),
       ref.watch(appLocalizationsProvider),
+      Hive.openBox("postBox"),
     );
   }
 }
@@ -21,10 +25,12 @@ class PostsRepository extends _$PostsRepository {
 class PostsApi {
   final Dio _client;
   final AppLocalizations _localizations;
+  final Future<Box<PostUio>> _postBox;
 
   PostsApi(
     this._client,
     this._localizations,
+    this._postBox,
   );
 
   Future<List<Post>> fetchCategoryArticlesByCount(
@@ -69,6 +75,48 @@ class PostsApi {
         "/posts/$postId",
       );
       return Post.fromJson(response.data);
+    } catch (e) {
+      throw _localizations.defaultError;
+    }
+  }
+
+  Future<void> savePost(PostUio post) async {
+    try {
+      Box<PostUio> box = await _postBox;
+      await box.add(post);
+    } catch (e) {
+      throw _localizations.defaultError;
+    }
+  }
+
+  Future<List<PostUio>> getAllPosts() async {
+    try {
+      Box<PostUio> box = await _postBox;
+      return box.values.toList();
+    } catch (e) {
+      throw _localizations.defaultError;
+    }
+  }
+
+  Future<PostUio?> getPostById(int id) async {
+    try {
+      Box<PostUio> box = await _postBox;
+      return box.values.firstWhereOrNull((post) => post.id == id);
+    } catch (e) {
+      throw _localizations.defaultError;
+    }
+  }
+
+  Future<void> removePost(int id) async {
+    try {
+      Box<PostUio> box = await _postBox;
+
+      final keysToDelete = box.keys.where((key) {
+        final post = box.get(key);
+        return post?.id == id;
+      }).toList();
+
+      await box.deleteAll(keysToDelete);
     } catch (e) {
       throw _localizations.defaultError;
     }

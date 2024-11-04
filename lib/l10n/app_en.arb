@@ -47,5 +47,13 @@
     "rateApp": "Rate our app",
     "@rateApp": {},
     "notifications": "Notifications",
-    "@notifications": {}
+    "@notifications": {},
+    "addedToFavorites": "Post added to favorites",
+    "@addedToFavorites": {},
+    "removedFromFavorites": "Post removed from favorites",
+    "@removedFromFavorites": {},
+    "noFavorites": "You didn't save any posts yet",
+    "@noFavorites": {},
+    "seePosts": "See posts",
+    "@seePosts": {}
 }

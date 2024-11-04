@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
-class ErrorToast {
+class SuccessToast {
   static void showToast({required String message}) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       toastification.show(
-        style: ToastificationStyle.flatColored,
-        title: const Text("Error"),
-        description: Text(message),
+        style: ToastificationStyle.simple,
+        title: Text(message),
+        description: const Text(""),
         alignment: Alignment.bottomCenter,
         autoCloseDuration: const Duration(seconds: 3),
-        backgroundColor: const Color(0xffff3a30),
+        backgroundColor: const Color(0xFF32BC32),
         foregroundColor: const Color(0xffffffff),
         boxShadow: lowModeShadow,
         closeOnClick: false,
         dragToClose: true,
-        showProgressBar: false,
-        showIcon: false,
-        closeButtonShowType: CloseButtonShowType.none,
-        borderSide: const BorderSide(
-          color: Colors.transparent,
-        ),
       );
     });
   }

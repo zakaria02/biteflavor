@@ -2,8 +2,8 @@ import 'package:biteflavor/data/author_repository.dart';
 import 'package:biteflavor/data/posts_repository.dart';
 import 'package:biteflavor/domain/categories_controller.dart';
 import 'package:biteflavor/models/author.dart';
-import 'package:biteflavor/models/category.dart';
 import 'package:biteflavor/models/post.dart';
+import 'package:biteflavor/uios/category_uio.dart';
 import 'package:biteflavor/uios/post_uio.dart';
 import 'package:biteflavor/utils/widgets/error_toast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,7 +28,7 @@ Future<List<PostUio>> posts(Ref ref, {int? categoryId, int count = 5}) async {
         authors.add(author);
       }
     }
-    List<Category> categories = ref.watch(categoriesProvider).value ?? [];
+    List<CategoryUio> categories = ref.watch(categoriesProvider).value ?? [];
     return posts
         .map((post) => PostUio(
               id: post.id,
@@ -65,7 +65,7 @@ Future<List<PostUio>> latest(Ref ref) async {
         authors.add(author);
       }
     }
-    List<Category> categories = ref.watch(categoriesProvider).value ?? [];
+    List<CategoryUio> categories = ref.watch(categoriesProvider).value ?? [];
     return posts
         .map(
           (post) => PostUio(
@@ -103,7 +103,7 @@ Future<PostUio?> postDetails(Ref ref, {required int postId}) async {
           .read(authorRepositoryProvider)
           .fetchAuthor(id: post.author!);
     }
-    List<Category> categories = ref.watch(categoriesProvider).value ?? [];
+    List<CategoryUio> categories = ref.watch(categoriesProvider).value ?? [];
     return PostUio(
       id: post.id,
       title: post.title?.rendered,
@@ -118,6 +118,10 @@ Future<PostUio?> postDetails(Ref ref, {required int postId}) async {
       link: post.link,
     );
   } catch (e) {
+    final post = await ref.watch(postsRepositoryProvider).getPostById(postId);
+    if (post != null) {
+      return post;
+    }
     ErrorToast.showToast(message: e.toString());
     return null;
   }

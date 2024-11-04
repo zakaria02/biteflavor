@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:biteflavor/domain/categories_controller.dart';
 import 'package:biteflavor/domain/posts_controller.dart';
-import 'package:biteflavor/models/category.dart';
 import 'package:biteflavor/presentation/home/widgets/categories_list.dart';
 import 'package:biteflavor/presentation/home/widgets/posts_carousel_slider.dart';
 import 'package:biteflavor/presentation/home/widgets/posts_list.dart';
 import 'package:biteflavor/presentation/home/widgets/section_title.dart';
+import 'package:biteflavor/uios/category_uio.dart';
 import 'package:biteflavor/uios/post_uio.dart';
 import 'package:biteflavor/utils/extensios/context_extension.dart';
-import 'package:biteflavor/views/no_internet_page.dart';
+import 'package:biteflavor/views/no_internet_view.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -62,7 +62,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               ),
               loading: () => const Skeletonizer(
                 child: CategoriesList(
-                  categories: Category.mock,
+                  categories: CategoryUio.mock,
                 ),
               ),
             ),
