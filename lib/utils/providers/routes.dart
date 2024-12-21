@@ -2,9 +2,12 @@ import 'package:biteflavor/presentation/favorites/favorites_page.dart';
 import 'package:biteflavor/presentation/home/home_page.dart';
 import 'package:biteflavor/presentation/main_page.dart';
 import 'package:biteflavor/presentation/post/post_details_page.dart';
+import 'package:biteflavor/presentation/search/search_page.dart';
 import 'package:biteflavor/presentation/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../presentation/post/posts_list.dart';
 
 part 'routes.g.dart';
 
@@ -26,6 +29,9 @@ final GlobalKey<NavigatorState> _settingsNavigatorKey =
           routes: [
             TypedGoRoute<PostDetailsRoute>(
               path: '/postDetails/:postId',
+            ),
+            TypedGoRoute<PostsListRoute>(
+              path: '/postsList/:title',
             ),
           ],
         ),
@@ -100,7 +106,7 @@ class SearchRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return const NoTransitionPage(child: Scaffold());
+    return const NoTransitionPage(child: SearchPage());
   }
 }
 
@@ -136,6 +142,7 @@ class SettingsRoute extends GoRouteData {
   }
 }
 
+// Post details
 class PostDetailsRoute extends GoRouteData {
   const PostDetailsRoute({required this.postId});
   final int postId;
@@ -143,5 +150,25 @@ class PostDetailsRoute extends GoRouteData {
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return NoTransitionPage(child: PostDetailsPage(postId: postId));
+  }
+}
+
+// Posts list
+class PostsListRoute extends GoRouteData {
+  const PostsListRoute({
+    required this.title,
+    this.categoryId,
+  });
+  final int? categoryId;
+  final String title;
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return NoTransitionPage(
+      child: PostsListPage(
+        categoryId: categoryId,
+        title: title,
+      ),
+    );
   }
 }

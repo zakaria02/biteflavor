@@ -1,5 +1,6 @@
 import 'package:biteflavor/models/post.dart';
 import 'package:biteflavor/uios/post_uio.dart';
+import 'package:biteflavor/utils/constant/app_texts.dart';
 import 'package:biteflavor/utils/providers/app_localizations_provider.dart';
 import 'package:biteflavor/utils/providers/client_provider.dart';
 import 'package:collection/collection.dart';
@@ -23,15 +24,16 @@ class PostsRepository extends _$PostsRepository {
 }
 
 class PostsApi {
-  final Dio _client;
   final AppLocalizations _localizations;
-  final Future<Box<PostUio>> _postBox;
 
   PostsApi(
     this._client,
     this._localizations,
     this._postBox,
   );
+
+  // Remote datasource
+  final Dio _client;
 
   Future<List<Post>> fetchCategoryArticlesByCount(
       {required int? categoryId, required int count}) async {
@@ -79,6 +81,20 @@ class PostsApi {
       throw _localizations.defaultError;
     }
   }
+
+  Future<List<int>> searchPosts({required String title}) async {
+    try {
+      final response = await _client.get(
+        "search?type=post&per_page=10&exclude=${AppTexts.searchExcludedPages}&search=$title",
+      );
+      return (response.data as List).map((post) => post["id"] as int).toList();
+    } catch (e) {
+      throw _localizations.defaultError;
+    }
+  }
+
+  // Local datasource
+  final Future<Box<PostUio>> _postBox;
 
   Future<void> savePost(PostUio post) async {
     try {

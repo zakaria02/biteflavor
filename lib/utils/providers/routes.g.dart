@@ -24,6 +24,10 @@ RouteBase get $mainShellRoute => StatefulShellRouteData.$route(
                   path: '/postDetails/:postId',
                   factory: $PostDetailsRouteExtension._fromState,
                 ),
+                GoRouteData.$route(
+                  path: '/postsList/:title',
+                  factory: $PostsListRouteExtension._fromState,
+                ),
               ],
             ),
           ],
@@ -99,6 +103,30 @@ extension $PostDetailsRouteExtension on PostDetailsRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+extension $PostsListRouteExtension on PostsListRoute {
+  static PostsListRoute _fromState(GoRouterState state) => PostsListRoute(
+        title: state.pathParameters['title']!,
+        categoryId: _$convertMapValue(
+            'category-id', state.uri.queryParameters, int.parse),
+      );
+
+  String get location => GoRouteData.$location(
+        '/postsList/${Uri.encodeComponent(title)}',
+        queryParams: {
+          if (categoryId != null) 'category-id': categoryId!.toString(),
+        },
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 extension $SearchRouteExtension on SearchRoute {
   static SearchRoute _fromState(GoRouterState state) => const SearchRoute();
 
@@ -148,4 +176,13 @@ extension $SettingsRouteExtension on SettingsRoute {
       context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
+}
+
+T? _$convertMapValue<T>(
+  String key,
+  Map<String, String> map,
+  T Function(String) converter,
+) {
+  final value = map[key];
+  return value == null ? null : converter(value);
 }

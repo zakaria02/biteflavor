@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'favorites_conrtoller.dart';
+part of 'favorites_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$favoritesHash() => r'0e3b18f64d04bf7b0d51dff05327c700141982ed';
+String _$favoritesHash() => r'17dd01bdbb8f350eebd772518d91d6822d4fb804';
 
 /// See also [Favorites].
 @ProviderFor(Favorites)

@@ -189,7 +189,7 @@ final latestProvider = FutureProvider<List<PostUio>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef LatestRef = FutureProviderRef<List<PostUio>>;
-String _$postDetailsHash() => r'd8a8ba78dd36f5932aad7dd87d0eb7cbed78629f';
+String _$postDetailsHash() => r'984ad8efeccf3f5517ec06974248c851de4469c6';
 
 /// See also [postDetails].
 @ProviderFor(postDetails)
@@ -317,6 +317,137 @@ class _PostDetailsProviderElement
 
   @override
   int get postId => (origin as PostDetailsProvider).postId;
+}
+
+String _$seeMorePostsHash() => r'f792b8869fec8e4376360ff4e8ebfad594e750e3';
+
+/// See also [seeMorePosts].
+@ProviderFor(seeMorePosts)
+const seeMorePostsProvider = SeeMorePostsFamily();
+
+/// See also [seeMorePosts].
+class SeeMorePostsFamily extends Family<AsyncValue<List<PostUio>>> {
+  /// See also [seeMorePosts].
+  const SeeMorePostsFamily();
+
+  /// See also [seeMorePosts].
+  SeeMorePostsProvider call({
+    int? categoryId,
+  }) {
+    return SeeMorePostsProvider(
+      categoryId: categoryId,
+    );
+  }
+
+  @override
+  SeeMorePostsProvider getProviderOverride(
+    covariant SeeMorePostsProvider provider,
+  ) {
+    return call(
+      categoryId: provider.categoryId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'seeMorePostsProvider';
+}
+
+/// See also [seeMorePosts].
+class SeeMorePostsProvider extends AutoDisposeFutureProvider<List<PostUio>> {
+  /// See also [seeMorePosts].
+  SeeMorePostsProvider({
+    int? categoryId,
+  }) : this._internal(
+          (ref) => seeMorePosts(
+            ref as SeeMorePostsRef,
+            categoryId: categoryId,
+          ),
+          from: seeMorePostsProvider,
+          name: r'seeMorePostsProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$seeMorePostsHash,
+          dependencies: SeeMorePostsFamily._dependencies,
+          allTransitiveDependencies:
+              SeeMorePostsFamily._allTransitiveDependencies,
+          categoryId: categoryId,
+        );
+
+  SeeMorePostsProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.categoryId,
+  }) : super.internal();
+
+  final int? categoryId;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<PostUio>> Function(SeeMorePostsRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: SeeMorePostsProvider._internal(
+        (ref) => create(ref as SeeMorePostsRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        categoryId: categoryId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<List<PostUio>> createElement() {
+    return _SeeMorePostsProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is SeeMorePostsProvider && other.categoryId == categoryId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, categoryId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin SeeMorePostsRef on AutoDisposeFutureProviderRef<List<PostUio>> {
+  /// The parameter `categoryId` of this provider.
+  int? get categoryId;
+}
+
+class _SeeMorePostsProviderElement
+    extends AutoDisposeFutureProviderElement<List<PostUio>>
+    with SeeMorePostsRef {
+  _SeeMorePostsProviderElement(super.provider);
+
+  @override
+  int? get categoryId => (origin as SeeMorePostsProvider).categoryId;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

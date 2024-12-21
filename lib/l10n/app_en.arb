@@ -55,5 +55,7 @@
     "noFavorites": "You didn't save any posts yet",
     "@noFavorites": {},
     "seePosts": "See posts",
-    "@seePosts": {}
+    "@seePosts": {},
+    "noPosts": "No posts found",
+    "@noPosts": {}
 }

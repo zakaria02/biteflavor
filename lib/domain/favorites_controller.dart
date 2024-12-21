@@ -5,7 +5,7 @@ import 'package:biteflavor/utils/widgets/error_toast.dart';
 import 'package:biteflavor/utils/widgets/success_toast.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'favorites_conrtoller.g.dart';
+part 'favorites_controller.g.dart';
 
 @Riverpod(keepAlive: true)
 class Favorites extends _$Favorites {

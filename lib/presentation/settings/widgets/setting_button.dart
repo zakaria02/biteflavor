@@ -9,12 +9,14 @@ class SettingButton extends StatelessWidget {
     required this.title,
     this.url,
     this.onPress,
+    this.isSwitch = false,
   }) : assert(onPress != null || url != null);
 
   final IconData icon;
   final String title;
   final String? url;
   final VoidCallback? onPress;
+  final bool isSwitch;
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +40,23 @@ class SettingButton extends StatelessWidget {
             Text(
               title,
               style: GoogleFonts.quicksand(
-                fontSize: 18,
+                fontSize: 15,
                 fontWeight: FontWeight.w700,
               ),
             ),
             const Spacer(),
-            const Icon(
-              Icons.arrow_forward_ios,
-              size: 16,
-              color: Colors.grey,
-            ),
+            isSwitch
+                ? Switch(
+                    value: true,
+                    onChanged: (value) {},
+                    activeTrackColor: Colors.grey[100],
+                    activeColor: Colors.green,
+                  )
+                : const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                    color: Colors.grey,
+                  ),
           ],
         ),
       ),

@@ -13,7 +13,7 @@ class SettingTitle extends StatelessWidget {
       child: Text(
         title,
         style: GoogleFonts.quicksand(
-          fontSize: 16,
+          fontSize: 15,
           color: Colors.grey,
           fontWeight: FontWeight.w700,
         ),

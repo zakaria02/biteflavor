@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NoDataView extends StatelessWidget {
-  const NoDataView({super.key});
+  const NoDataView({super.key, required this.title});
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class NoDataView extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
-            context.l10n.noFavorites,
+            title,
             style: GoogleFonts.quicksand(
               fontSize: 16,
               fontWeight: FontWeight.w500,

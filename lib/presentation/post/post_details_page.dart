@@ -1,4 +1,4 @@
-import 'package:biteflavor/domain/favorites_conrtoller.dart';
+import 'package:biteflavor/domain/favorites_controller.dart';
 import 'package:biteflavor/domain/posts_controller.dart';
 import 'package:biteflavor/presentation/post/widget/post_details_view.dart';
 import 'package:biteflavor/uios/post_uio.dart';

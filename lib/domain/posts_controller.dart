@@ -126,3 +126,11 @@ Future<PostUio?> postDetails(Ref ref, {required int postId}) async {
     return null;
   }
 }
+
+@riverpod
+Future<List<PostUio>> seeMorePosts(Ref ref, {int? categoryId}) async {
+  if (categoryId == null) {
+    return latest(ref);
+  }
+  return posts(ref, categoryId: categoryId, count: 10);
+}

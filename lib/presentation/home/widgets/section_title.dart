@@ -1,12 +1,20 @@
 import 'package:biteflavor/utils/extensios/context_extension.dart';
+import 'package:biteflavor/utils/providers/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SectionTitle extends StatelessWidget {
+  final int? id;
   final String title;
   final VoidCallback onPress;
 
-  const SectionTitle({super.key, required this.title, required this.onPress});
+  const SectionTitle({
+    super.key,
+    this.id,
+    required this.title,
+    required this.onPress,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,7 +30,9 @@ class SectionTitle extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: onPress,
+            onTap: () =>
+                PostsListRoute(title: title, categoryId: id == -1 ? null : id)
+                    .go(context),
             child: Text(
               context.l10n.seeMore,
               style: GoogleFonts.quicksand(

@@ -19,6 +19,7 @@ class SettingsPage extends StatelessWidget {
           icon: EvaIcons.bell_outline,
           title: context.l10n.notifications,
           onPress: () {},
+          isSwitch: true,
         ),
         SettingButton(
           icon: EvaIcons.star_outline,

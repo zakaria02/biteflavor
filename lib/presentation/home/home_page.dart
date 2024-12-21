@@ -70,6 +70,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         SectionTitle(
           title: context.l10n.categoryArticles(
               ref.watch(selectedCategoryProvider)?.name ?? ""),
+          id: ref.watch(selectedCategoryProvider)?.id,
           onPress: () {},
         ),
         const SizedBox(height: 16),
