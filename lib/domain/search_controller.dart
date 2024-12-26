@@ -2,6 +2,7 @@ import 'package:biteflavor/data/author_repository.dart';
 import 'package:biteflavor/data/posts_repository.dart';
 import 'package:biteflavor/domain/categories_controller.dart';
 import 'package:biteflavor/models/author.dart';
+import 'package:biteflavor/models/models_extensions.dart';
 import 'package:biteflavor/models/post.dart';
 import 'package:biteflavor/uios/category_uio.dart';
 import 'package:biteflavor/uios/post_uio.dart';
@@ -39,21 +40,15 @@ class SearchedPosts extends _$SearchedPosts {
               .read(authorRepositoryProvider)
               .fetchAuthor(id: post.author!);
         }
+        PostFeaturedMedia? media;
+        if (post.featured_media != null) {
+          media = await ref
+              .read(postsRepositoryProvider)
+              .getPostFeaturedMedia(id: post.featured_media!);
+        }
         List<CategoryUio> categories =
             ref.watch(categoriesProvider).value ?? [];
-        posts.add(PostUio(
-          id: post.id,
-          title: post.title?.rendered,
-          htmlContent: post.content?.rendered,
-          categories: categories
-              .where((category) =>
-                  (post.categories ?? []).contains(category.id ?? 0))
-              .toList(),
-          picture: post.uagb_featured_image_src?.large?.first.toString(),
-          date: post.date,
-          author: author?.toAuthorUio(),
-          link: post.link,
-        ));
+        posts.add(post.toPostUio(categories, [media!], [author!]));
       }
       state = AsyncValue.data(posts);
     } catch (e) {

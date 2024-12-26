@@ -23,8 +23,7 @@ mixin _$Post {
   int? get id => throw _privateConstructorUsedError;
   ArticleTitle? get title => throw _privateConstructorUsedError;
   List<int>? get categories => throw _privateConstructorUsedError;
-  PostPictures? get uagb_featured_image_src =>
-      throw _privateConstructorUsedError;
+  int? get featured_media => throw _privateConstructorUsedError;
   ArticleContent? get content => throw _privateConstructorUsedError;
   int? get author => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
@@ -48,14 +47,13 @@ abstract class $PostCopyWith<$Res> {
       {int? id,
       ArticleTitle? title,
       List<int>? categories,
-      PostPictures? uagb_featured_image_src,
+      int? featured_media,
       ArticleContent? content,
       int? author,
       DateTime? date,
       String? link});
 
   $ArticleTitleCopyWith<$Res>? get title;
-  $PostPicturesCopyWith<$Res>? get uagb_featured_image_src;
   $ArticleContentCopyWith<$Res>? get content;
 }
 
@@ -77,7 +75,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? id = freezed,
     Object? title = freezed,
     Object? categories = freezed,
-    Object? uagb_featured_image_src = freezed,
+    Object? featured_media = freezed,
     Object? content = freezed,
     Object? author = freezed,
     Object? date = freezed,
@@ -96,10 +94,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<int>?,
-      uagb_featured_image_src: freezed == uagb_featured_image_src
-          ? _value.uagb_featured_image_src
-          : uagb_featured_image_src // ignore: cast_nullable_to_non_nullable
-              as PostPictures?,
+      featured_media: freezed == featured_media
+          ? _value.featured_media
+          : featured_media // ignore: cast_nullable_to_non_nullable
+              as int?,
       content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -137,21 +135,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PostPicturesCopyWith<$Res>? get uagb_featured_image_src {
-    if (_value.uagb_featured_image_src == null) {
-      return null;
-    }
-
-    return $PostPicturesCopyWith<$Res>(_value.uagb_featured_image_src!,
-        (value) {
-      return _then(_value.copyWith(uagb_featured_image_src: value) as $Val);
-    });
-  }
-
-  /// Create a copy of Post
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
   $ArticleContentCopyWith<$Res>? get content {
     if (_value.content == null) {
       return null;
@@ -174,7 +157,7 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
       {int? id,
       ArticleTitle? title,
       List<int>? categories,
-      PostPictures? uagb_featured_image_src,
+      int? featured_media,
       ArticleContent? content,
       int? author,
       DateTime? date,
@@ -182,8 +165,6 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
 
   @override
   $ArticleTitleCopyWith<$Res>? get title;
-  @override
-  $PostPicturesCopyWith<$Res>? get uagb_featured_image_src;
   @override
   $ArticleContentCopyWith<$Res>? get content;
 }
@@ -203,7 +184,7 @@ class __$$PostImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? title = freezed,
     Object? categories = freezed,
-    Object? uagb_featured_image_src = freezed,
+    Object? featured_media = freezed,
     Object? content = freezed,
     Object? author = freezed,
     Object? date = freezed,
@@ -222,10 +203,10 @@ class __$$PostImplCopyWithImpl<$Res>
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<int>?,
-      uagb_featured_image_src: freezed == uagb_featured_image_src
-          ? _value.uagb_featured_image_src
-          : uagb_featured_image_src // ignore: cast_nullable_to_non_nullable
-              as PostPictures?,
+      featured_media: freezed == featured_media
+          ? _value.featured_media
+          : featured_media // ignore: cast_nullable_to_non_nullable
+              as int?,
       content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -253,7 +234,7 @@ class _$PostImpl extends _Post {
       {this.id,
       this.title,
       final List<int>? categories,
-      this.uagb_featured_image_src,
+      this.featured_media,
       this.content,
       this.author,
       this.date,
@@ -279,7 +260,7 @@ class _$PostImpl extends _Post {
   }
 
   @override
-  final PostPictures? uagb_featured_image_src;
+  final int? featured_media;
   @override
   final ArticleContent? content;
   @override
@@ -291,7 +272,7 @@ class _$PostImpl extends _Post {
 
   @override
   String toString() {
-    return 'Post(id: $id, title: $title, categories: $categories, uagb_featured_image_src: $uagb_featured_image_src, content: $content, author: $author, date: $date, link: $link)';
+    return 'Post(id: $id, title: $title, categories: $categories, featured_media: $featured_media, content: $content, author: $author, date: $date, link: $link)';
   }
 
   @override
@@ -303,9 +284,8 @@ class _$PostImpl extends _Post {
             (identical(other.title, title) || other.title == title) &&
             const DeepCollectionEquality()
                 .equals(other._categories, _categories) &&
-            (identical(
-                    other.uagb_featured_image_src, uagb_featured_image_src) ||
-                other.uagb_featured_image_src == uagb_featured_image_src) &&
+            (identical(other.featured_media, featured_media) ||
+                other.featured_media == featured_media) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.author, author) || other.author == author) &&
             (identical(other.date, date) || other.date == date) &&
@@ -319,7 +299,7 @@ class _$PostImpl extends _Post {
       id,
       title,
       const DeepCollectionEquality().hash(_categories),
-      uagb_featured_image_src,
+      featured_media,
       content,
       author,
       date,
@@ -346,7 +326,7 @@ abstract class _Post extends Post {
       {final int? id,
       final ArticleTitle? title,
       final List<int>? categories,
-      final PostPictures? uagb_featured_image_src,
+      final int? featured_media,
       final ArticleContent? content,
       final int? author,
       final DateTime? date,
@@ -362,7 +342,7 @@ abstract class _Post extends Post {
   @override
   List<int>? get categories;
   @override
-  PostPictures? get uagb_featured_image_src;
+  int? get featured_media;
   @override
   ArticleContent? get content;
   @override
@@ -684,289 +664,171 @@ abstract class _ArticleContent extends ArticleContent {
       throw _privateConstructorUsedError;
 }
 
-PostPictures _$PostPicturesFromJson(Map<String, dynamic> json) {
-  return _PostPictures.fromJson(json);
+PostFeaturedMedia _$PostFeaturedMediaFromJson(Map<String, dynamic> json) {
+  return _PostFeaturedMedia.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PostPictures {
-  List<dynamic>? get full => throw _privateConstructorUsedError;
-  List<dynamic>? get thumbnail => throw _privateConstructorUsedError;
-  List<dynamic>? get medium => throw _privateConstructorUsedError;
-  List<dynamic>? get medium_large => throw _privateConstructorUsedError;
-  List<dynamic>? get large => throw _privateConstructorUsedError;
+mixin _$PostFeaturedMedia {
+  int? get id => throw _privateConstructorUsedError;
+  String? get source_url => throw _privateConstructorUsedError;
 
-  /// Serializes this PostPictures to a JSON map.
+  /// Serializes this PostFeaturedMedia to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of PostPictures
+  /// Create a copy of PostFeaturedMedia
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PostPicturesCopyWith<PostPictures> get copyWith =>
+  $PostFeaturedMediaCopyWith<PostFeaturedMedia> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PostPicturesCopyWith<$Res> {
-  factory $PostPicturesCopyWith(
-          PostPictures value, $Res Function(PostPictures) then) =
-      _$PostPicturesCopyWithImpl<$Res, PostPictures>;
+abstract class $PostFeaturedMediaCopyWith<$Res> {
+  factory $PostFeaturedMediaCopyWith(
+          PostFeaturedMedia value, $Res Function(PostFeaturedMedia) then) =
+      _$PostFeaturedMediaCopyWithImpl<$Res, PostFeaturedMedia>;
   @useResult
-  $Res call(
-      {List<dynamic>? full,
-      List<dynamic>? thumbnail,
-      List<dynamic>? medium,
-      List<dynamic>? medium_large,
-      List<dynamic>? large});
+  $Res call({int? id, String? source_url});
 }
 
 /// @nodoc
-class _$PostPicturesCopyWithImpl<$Res, $Val extends PostPictures>
-    implements $PostPicturesCopyWith<$Res> {
-  _$PostPicturesCopyWithImpl(this._value, this._then);
+class _$PostFeaturedMediaCopyWithImpl<$Res, $Val extends PostFeaturedMedia>
+    implements $PostFeaturedMediaCopyWith<$Res> {
+  _$PostFeaturedMediaCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PostPictures
+  /// Create a copy of PostFeaturedMedia
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? full = freezed,
-    Object? thumbnail = freezed,
-    Object? medium = freezed,
-    Object? medium_large = freezed,
-    Object? large = freezed,
+    Object? id = freezed,
+    Object? source_url = freezed,
   }) {
     return _then(_value.copyWith(
-      full: freezed == full
-          ? _value.full
-          : full // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      thumbnail: freezed == thumbnail
-          ? _value.thumbnail
-          : thumbnail // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      medium: freezed == medium
-          ? _value.medium
-          : medium // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      medium_large: freezed == medium_large
-          ? _value.medium_large
-          : medium_large // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      large: freezed == large
-          ? _value.large
-          : large // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      source_url: freezed == source_url
+          ? _value.source_url
+          : source_url // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$PostPicturesImplCopyWith<$Res>
-    implements $PostPicturesCopyWith<$Res> {
-  factory _$$PostPicturesImplCopyWith(
-          _$PostPicturesImpl value, $Res Function(_$PostPicturesImpl) then) =
-      __$$PostPicturesImplCopyWithImpl<$Res>;
+abstract class _$$PostFeaturedMediaImplCopyWith<$Res>
+    implements $PostFeaturedMediaCopyWith<$Res> {
+  factory _$$PostFeaturedMediaImplCopyWith(_$PostFeaturedMediaImpl value,
+          $Res Function(_$PostFeaturedMediaImpl) then) =
+      __$$PostFeaturedMediaImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<dynamic>? full,
-      List<dynamic>? thumbnail,
-      List<dynamic>? medium,
-      List<dynamic>? medium_large,
-      List<dynamic>? large});
+  $Res call({int? id, String? source_url});
 }
 
 /// @nodoc
-class __$$PostPicturesImplCopyWithImpl<$Res>
-    extends _$PostPicturesCopyWithImpl<$Res, _$PostPicturesImpl>
-    implements _$$PostPicturesImplCopyWith<$Res> {
-  __$$PostPicturesImplCopyWithImpl(
-      _$PostPicturesImpl _value, $Res Function(_$PostPicturesImpl) _then)
+class __$$PostFeaturedMediaImplCopyWithImpl<$Res>
+    extends _$PostFeaturedMediaCopyWithImpl<$Res, _$PostFeaturedMediaImpl>
+    implements _$$PostFeaturedMediaImplCopyWith<$Res> {
+  __$$PostFeaturedMediaImplCopyWithImpl(_$PostFeaturedMediaImpl _value,
+      $Res Function(_$PostFeaturedMediaImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of PostPictures
+  /// Create a copy of PostFeaturedMedia
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? full = freezed,
-    Object? thumbnail = freezed,
-    Object? medium = freezed,
-    Object? medium_large = freezed,
-    Object? large = freezed,
+    Object? id = freezed,
+    Object? source_url = freezed,
   }) {
-    return _then(_$PostPicturesImpl(
-      full: freezed == full
-          ? _value._full
-          : full // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      thumbnail: freezed == thumbnail
-          ? _value._thumbnail
-          : thumbnail // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      medium: freezed == medium
-          ? _value._medium
-          : medium // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      medium_large: freezed == medium_large
-          ? _value._medium_large
-          : medium_large // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      large: freezed == large
-          ? _value._large
-          : large // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+    return _then(_$PostFeaturedMediaImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      source_url: freezed == source_url
+          ? _value.source_url
+          : source_url // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$PostPicturesImpl extends _PostPictures {
-  const _$PostPicturesImpl(
-      {final List<dynamic>? full,
-      final List<dynamic>? thumbnail,
-      final List<dynamic>? medium,
-      final List<dynamic>? medium_large,
-      final List<dynamic>? large})
-      : _full = full,
-        _thumbnail = thumbnail,
-        _medium = medium,
-        _medium_large = medium_large,
-        _large = large,
-        super._();
+class _$PostFeaturedMediaImpl extends _PostFeaturedMedia {
+  const _$PostFeaturedMediaImpl({this.id, this.source_url}) : super._();
 
-  factory _$PostPicturesImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PostPicturesImplFromJson(json);
+  factory _$PostFeaturedMediaImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PostFeaturedMediaImplFromJson(json);
 
-  final List<dynamic>? _full;
   @override
-  List<dynamic>? get full {
-    final value = _full;
-    if (value == null) return null;
-    if (_full is EqualUnmodifiableListView) return _full;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<dynamic>? _thumbnail;
+  final int? id;
   @override
-  List<dynamic>? get thumbnail {
-    final value = _thumbnail;
-    if (value == null) return null;
-    if (_thumbnail is EqualUnmodifiableListView) return _thumbnail;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<dynamic>? _medium;
-  @override
-  List<dynamic>? get medium {
-    final value = _medium;
-    if (value == null) return null;
-    if (_medium is EqualUnmodifiableListView) return _medium;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<dynamic>? _medium_large;
-  @override
-  List<dynamic>? get medium_large {
-    final value = _medium_large;
-    if (value == null) return null;
-    if (_medium_large is EqualUnmodifiableListView) return _medium_large;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<dynamic>? _large;
-  @override
-  List<dynamic>? get large {
-    final value = _large;
-    if (value == null) return null;
-    if (_large is EqualUnmodifiableListView) return _large;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final String? source_url;
 
   @override
   String toString() {
-    return 'PostPictures(full: $full, thumbnail: $thumbnail, medium: $medium, medium_large: $medium_large, large: $large)';
+    return 'PostFeaturedMedia(id: $id, source_url: $source_url)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PostPicturesImpl &&
-            const DeepCollectionEquality().equals(other._full, _full) &&
-            const DeepCollectionEquality()
-                .equals(other._thumbnail, _thumbnail) &&
-            const DeepCollectionEquality().equals(other._medium, _medium) &&
-            const DeepCollectionEquality()
-                .equals(other._medium_large, _medium_large) &&
-            const DeepCollectionEquality().equals(other._large, _large));
+            other is _$PostFeaturedMediaImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.source_url, source_url) ||
+                other.source_url == source_url));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_full),
-      const DeepCollectionEquality().hash(_thumbnail),
-      const DeepCollectionEquality().hash(_medium),
-      const DeepCollectionEquality().hash(_medium_large),
-      const DeepCollectionEquality().hash(_large));
+  int get hashCode => Object.hash(runtimeType, id, source_url);
 
-  /// Create a copy of PostPictures
+  /// Create a copy of PostFeaturedMedia
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$PostPicturesImplCopyWith<_$PostPicturesImpl> get copyWith =>
-      __$$PostPicturesImplCopyWithImpl<_$PostPicturesImpl>(this, _$identity);
+  _$$PostFeaturedMediaImplCopyWith<_$PostFeaturedMediaImpl> get copyWith =>
+      __$$PostFeaturedMediaImplCopyWithImpl<_$PostFeaturedMediaImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PostPicturesImplToJson(
+    return _$$PostFeaturedMediaImplToJson(
       this,
     );
   }
 }
 
-abstract class _PostPictures extends PostPictures {
-  const factory _PostPictures(
-      {final List<dynamic>? full,
-      final List<dynamic>? thumbnail,
-      final List<dynamic>? medium,
-      final List<dynamic>? medium_large,
-      final List<dynamic>? large}) = _$PostPicturesImpl;
-  const _PostPictures._() : super._();
+abstract class _PostFeaturedMedia extends PostFeaturedMedia {
+  const factory _PostFeaturedMedia({final int? id, final String? source_url}) =
+      _$PostFeaturedMediaImpl;
+  const _PostFeaturedMedia._() : super._();
 
-  factory _PostPictures.fromJson(Map<String, dynamic> json) =
-      _$PostPicturesImpl.fromJson;
+  factory _PostFeaturedMedia.fromJson(Map<String, dynamic> json) =
+      _$PostFeaturedMediaImpl.fromJson;
 
   @override
-  List<dynamic>? get full;
+  int? get id;
   @override
-  List<dynamic>? get thumbnail;
-  @override
-  List<dynamic>? get medium;
-  @override
-  List<dynamic>? get medium_large;
-  @override
-  List<dynamic>? get large;
+  String? get source_url;
 
-  /// Create a copy of PostPictures
+  /// Create a copy of PostFeaturedMedia
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PostPicturesImplCopyWith<_$PostPicturesImpl> get copyWith =>
+  _$$PostFeaturedMediaImplCopyWith<_$PostFeaturedMediaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

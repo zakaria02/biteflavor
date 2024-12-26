@@ -10,7 +10,7 @@ class Post with _$Post {
     int? id,
     ArticleTitle? title,
     List<int>? categories,
-    PostPictures? uagb_featured_image_src,
+    int? featured_media,
     ArticleContent? content,
     int? author,
     DateTime? date,
@@ -45,16 +45,13 @@ class ArticleContent with _$ArticleContent {
 }
 
 @freezed
-class PostPictures with _$PostPictures {
-  const PostPictures._();
-  const factory PostPictures({
-    List<dynamic>? full,
-    List<dynamic>? thumbnail,
-    List<dynamic>? medium,
-    List<dynamic>? medium_large,
-    List<dynamic>? large,
-  }) = _PostPictures;
+class PostFeaturedMedia with _$PostFeaturedMedia {
+  const PostFeaturedMedia._();
+  const factory PostFeaturedMedia({
+    int? id,
+    String? source_url,
+  }) = _PostFeaturedMedia;
 
-  factory PostPictures.fromJson(Map<String, dynamic> json) =>
-      _$PostPicturesFromJson(json);
+  factory PostFeaturedMedia.fromJson(Map<String, dynamic> json) =>
+      _$PostFeaturedMediaFromJson(json);
 }

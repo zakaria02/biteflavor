@@ -14,10 +14,7 @@ _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
       categories: (json['categories'] as List<dynamic>?)
           ?.map((e) => (e as num).toInt())
           .toList(),
-      uagb_featured_image_src: json['uagb_featured_image_src'] == null
-          ? null
-          : PostPictures.fromJson(
-              json['uagb_featured_image_src'] as Map<String, dynamic>),
+      featured_media: (json['featured_media'] as num?)?.toInt(),
       content: json['content'] == null
           ? null
           : ArticleContent.fromJson(json['content'] as Map<String, dynamic>),
@@ -32,7 +29,7 @@ Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
       'id': instance.id,
       'title': instance.title,
       'categories': instance.categories,
-      'uagb_featured_image_src': instance.uagb_featured_image_src,
+      'featured_media': instance.featured_media,
       'content': instance.content,
       'author': instance.author,
       'date': instance.date?.toIso8601String(),
@@ -60,20 +57,16 @@ Map<String, dynamic> _$$ArticleContentImplToJson(
       'rendered': instance.rendered,
     };
 
-_$PostPicturesImpl _$$PostPicturesImplFromJson(Map<String, dynamic> json) =>
-    _$PostPicturesImpl(
-      full: json['full'] as List<dynamic>?,
-      thumbnail: json['thumbnail'] as List<dynamic>?,
-      medium: json['medium'] as List<dynamic>?,
-      medium_large: json['medium_large'] as List<dynamic>?,
-      large: json['large'] as List<dynamic>?,
+_$PostFeaturedMediaImpl _$$PostFeaturedMediaImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PostFeaturedMediaImpl(
+      id: (json['id'] as num?)?.toInt(),
+      source_url: json['source_url'] as String?,
     );
 
-Map<String, dynamic> _$$PostPicturesImplToJson(_$PostPicturesImpl instance) =>
+Map<String, dynamic> _$$PostFeaturedMediaImplToJson(
+        _$PostFeaturedMediaImpl instance) =>
     <String, dynamic>{
-      'full': instance.full,
-      'thumbnail': instance.thumbnail,
-      'medium': instance.medium,
-      'medium_large': instance.medium_large,
-      'large': instance.large,
+      'id': instance.id,
+      'source_url': instance.source_url,
     };

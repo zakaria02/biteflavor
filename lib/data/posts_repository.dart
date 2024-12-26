@@ -93,6 +93,17 @@ class PostsApi {
     }
   }
 
+  Future<PostFeaturedMedia?> getPostFeaturedMedia({required int id}) async {
+    try {
+      final response = await _client.get(
+        "media/$id",
+      );
+      return PostFeaturedMedia.fromJson(response.data);
+    } catch (e) {
+      throw _localizations.defaultError;
+    }
+  }
+
   // Local datasource
   final Future<Box<PostUio>> _postBox;
 

@@ -20,7 +20,7 @@ class PostDisplay extends StatelessWidget {
             child: Image.network(post.picture ?? ""),
           ),
           Container(
-            height: 210,
+            height: 190,
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

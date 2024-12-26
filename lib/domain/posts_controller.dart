@@ -2,12 +2,12 @@ import 'package:biteflavor/data/author_repository.dart';
 import 'package:biteflavor/data/posts_repository.dart';
 import 'package:biteflavor/domain/categories_controller.dart';
 import 'package:biteflavor/models/author.dart';
+import 'package:biteflavor/models/models_extensions.dart';
 import 'package:biteflavor/models/post.dart';
 import 'package:biteflavor/uios/category_uio.dart';
 import 'package:biteflavor/uios/post_uio.dart';
 import 'package:biteflavor/utils/widgets/error_toast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:collection/collection.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'posts_controller.g.dart';
@@ -21,29 +21,28 @@ Future<List<PostUio>> posts(Ref ref, {int? categoryId, int count = 5}) async {
             categoryId: categoryId == -1 ? null : categoryId, count: count);
     List<Author> authors = [];
     for (Post post in posts) {
-      if (post.author != null) {
+      if (post.author != null &&
+          authors.where((auth) => auth.id == post.author).isEmpty) {
         Author author = await ref
             .read(authorRepositoryProvider)
             .fetchAuthor(id: post.author!);
         authors.add(author);
       }
     }
+    List<PostFeaturedMedia> medias = [];
+    for (Post post in posts) {
+      if (post.featured_media != null) {
+        PostFeaturedMedia? media = await ref
+            .read(postsRepositoryProvider)
+            .getPostFeaturedMedia(id: post.featured_media!);
+        if (media != null) {
+          medias.add(media);
+        }
+      }
+    }
     List<CategoryUio> categories = ref.watch(categoriesProvider).value ?? [];
     return posts
-        .map((post) => PostUio(
-              id: post.id,
-              title: post.title?.rendered,
-              htmlContent: post.content?.rendered,
-              categories: categories
-                  .where((category) =>
-                      (post.categories ?? []).contains(category.id ?? 0))
-                  .toList(),
-              picture: post.uagb_featured_image_src?.large?.first.toString(),
-              date: post.date,
-              author: authors
-                  .firstWhereOrNull((author) => author.id == post.author)
-                  ?.toAuthorUio(),
-            ))
+        .map((post) => post.toPostUio(categories, medias, authors))
         .toList();
   } catch (e) {
     ErrorToast.showToast(message: e.toString());
@@ -65,25 +64,20 @@ Future<List<PostUio>> latest(Ref ref) async {
         authors.add(author);
       }
     }
+    List<PostFeaturedMedia> medias = [];
+    for (Post post in posts) {
+      if (post.featured_media != null) {
+        PostFeaturedMedia? media = await ref
+            .read(postsRepositoryProvider)
+            .getPostFeaturedMedia(id: post.featured_media!);
+        if (media != null) {
+          medias.add(media);
+        }
+      }
+    }
     List<CategoryUio> categories = ref.watch(categoriesProvider).value ?? [];
     return posts
-        .map(
-          (post) => PostUio(
-            id: post.id,
-            title: post.title?.rendered,
-            htmlContent: post.content?.rendered,
-            categories: categories
-                .where((category) =>
-                    (post.categories ?? []).contains(category.id ?? 0))
-                .toList(),
-            picture: post.uagb_featured_image_src?.large?.first.toString(),
-            date: post.date,
-            author: authors
-                .firstWhereOrNull((author) => author.id == post.author)
-                ?.toAuthorUio(),
-            link: post.link,
-          ),
-        )
+        .map((post) => post.toPostUio(categories, medias, authors))
         .toList();
   } catch (e) {
     ErrorToast.showToast(message: e.toString());
@@ -103,20 +97,14 @@ Future<PostUio?> postDetails(Ref ref, {required int postId}) async {
           .read(authorRepositoryProvider)
           .fetchAuthor(id: post.author!);
     }
+    PostFeaturedMedia? media;
+    if (post.featured_media != null) {
+      media = await ref
+          .read(postsRepositoryProvider)
+          .getPostFeaturedMedia(id: post.featured_media!);
+    }
     List<CategoryUio> categories = ref.watch(categoriesProvider).value ?? [];
-    return PostUio(
-      id: post.id,
-      title: post.title?.rendered,
-      htmlContent: post.content?.rendered,
-      categories: categories
-          .where(
-              (category) => (post.categories ?? []).contains(category.id ?? 0))
-          .toList(),
-      picture: post.uagb_featured_image_src?.large?.first.toString(),
-      date: post.date,
-      author: author?.toAuthorUio(),
-      link: post.link,
-    );
+    return post.toPostUio(categories, [media!], [author!]);
   } catch (e) {
     final post = await ref.watch(postsRepositoryProvider).getPostById(postId);
     if (post != null) {
