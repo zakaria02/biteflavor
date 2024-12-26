@@ -1,13 +1,17 @@
+import 'package:biteflavor/firebase_options.dart';
 import 'package:biteflavor/uios/author_uio.dart';
 import 'package:biteflavor/uios/category_uio.dart';
 import 'package:biteflavor/uios/post_uio.dart';
 import 'package:biteflavor/utils/constant/app_colors.dart';
 import 'package:biteflavor/utils/constant/app_texts.dart';
+import 'package:biteflavor/utils/notifications/notifications.dart';
 import 'package:biteflavor/utils/providers/router.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:toastification/toastification.dart';
 
 void main() async {
@@ -15,6 +19,15 @@ void main() async {
   Hive.registerAdapter(PostUioAdapter());
   Hive.registerAdapter(CategoryUioAdapter());
   Hive.registerAdapter(AuthorUioAdapter());
+
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+  OneSignal.initialize("d5b3fbe5-14b7-485d-9a4b-8d3e803d3586");
+  await OneSignal.Notifications.requestPermission(true);
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(
     const ProviderScope(
       child: MyApp(),
@@ -28,6 +41,9 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final goRouter = ref.watch(routerProvider);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      initNotification(goRouter);
+    });
 
     return ToastificationWrapper(
       child: MaterialApp.router(

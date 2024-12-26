@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "163827711405",
+    "project_id": "biteflavor-87f57",
+    "storage_bucket": "biteflavor-87f57.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163827711405:android:ce855037cd671f3f647524",
+        "android_client_info": {
+          "package_name": "com.biteflavor.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDER-rX0RIN_dDGAP9_ESMQXrjDkhedhcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
