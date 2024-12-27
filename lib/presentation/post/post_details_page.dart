@@ -7,6 +7,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -23,11 +24,63 @@ class PostDetailsPage extends ConsumerStatefulWidget {
 
 class _PostDetailsPageState extends ConsumerState<PostDetailsPage> {
   bool isFavorite = false;
+  BannerAd? _bannerAd;
+  bool _bannerAdLoaded = false;
+
+  final adUnitId = "ca-app-pub-4667283993751200/4615119196";
+  final adBannerUnitId = 'ca-app-pub-4667283993751200/5427575786';
+
+  /// Loads an interstitial ad.
+  Future<void> loadAd() async {
+    await InterstitialAd.load(
+        adUnitId: adUnitId,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (ad) {
+            debugPrint('$ad loaded.');
+            ad.show();
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            debugPrint('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  void loadBannerAd() async {
+    _bannerAd = BannerAd(
+      adUnitId: adBannerUnitId,
+      request: const AdRequest(),
+      size: AdSize.fullBanner,
+      listener: BannerAdListener(
+        // Called when an ad is successfully received.
+        onAdLoaded: (ad) {
+          setState(() {
+            _bannerAdLoaded = true;
+          });
+        },
+        // Called when an ad request failed.
+        onAdFailedToLoad: (ad, err) {
+          debugPrint('BannerAd failed to load: $err');
+          // Dispose the ad here to free resources.
+          ad.dispose();
+        },
+      ),
+    )..load();
+  }
+
+  @override
+  void initState() {
+    loadAd();
+    loadBannerAd();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(postDetailsProvider(postId: widget.postId));
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       final favorites = ref.watch(favoritesProvider).value ?? [];
       setState(() {
         isFavorite =
@@ -99,6 +152,12 @@ class _PostDetailsPageState extends ConsumerState<PostDetailsPage> {
             ),
           ),
         ),
+        if (_bannerAdLoaded && _bannerAd != null)
+          SizedBox(
+            width: _bannerAd!.size.width.toDouble(),
+            height: _bannerAd!.size.height.toDouble(),
+            child: AdWidget(ad: _bannerAd!),
+          ),
       ],
     );
   }
