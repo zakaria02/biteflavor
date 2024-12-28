@@ -28,6 +28,10 @@ RouteBase get $mainShellRoute => StatefulShellRouteData.$route(
                   path: '/postsList/:title',
                   factory: $PostsListRouteExtension._fromState,
                 ),
+                GoRouteData.$route(
+                  path: '/notifications',
+                  factory: $NotificationsRouteExtension._fromState,
+                ),
               ],
             ),
           ],
@@ -115,6 +119,24 @@ extension $PostsListRouteExtension on PostsListRoute {
         queryParams: {
           if (categoryId != null) 'category-id': categoryId!.toString(),
         },
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $NotificationsRouteExtension on NotificationsRoute {
+  static NotificationsRoute _fromState(GoRouterState state) =>
+      NotificationsRoute();
+
+  String get location => GoRouteData.$location(
+        '/notifications',
       );
 
   void go(BuildContext context) => context.go(location);

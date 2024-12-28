@@ -1,10 +1,13 @@
+import 'package:biteflavor/data/notification_repository.dart';
 import 'package:biteflavor/firebase_options.dart';
 import 'package:biteflavor/uios/author_uio.dart';
 import 'package:biteflavor/uios/category_uio.dart';
+import 'package:biteflavor/uios/notification_uio.dart';
 import 'package:biteflavor/uios/post_uio.dart';
 import 'package:biteflavor/utils/constant/app_texts.dart';
 import 'package:biteflavor/utils/providers/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -16,6 +19,10 @@ void initNotificationClickListnner(GoRouter router) {
       for (var entry in event.notification.additionalData!.entries) {
         if (entry.key == 'id') {
           final int id = int.parse(entry.value);
+          final container = ProviderContainer();
+          final notifRepository =
+              container.read(notificationRepositoryProvider);
+          notifRepository.markAsRead(id);
           router.push(PostDetailsRoute(postId: id).location);
         }
       }
@@ -44,6 +51,28 @@ Future<void> initFirebase() async {
 Future<void> initNotifications() async {
   OneSignal.initialize(AppTexts.oneSignalId);
   await OneSignal.Notifications.requestPermission(true);
+
+  OneSignal.Notifications.addForegroundWillDisplayListener((event) async {
+    late int id;
+    if (event.notification.additionalData != null) {
+      for (var entry in event.notification.additionalData!.entries) {
+        if (entry.key == 'id') {
+          id = int.parse(entry.value);
+        }
+      }
+    }
+    final container = ProviderContainer();
+    final notifRepository = container.read(notificationRepositoryProvider);
+    await notifRepository.saveNotification(
+      NotificationUio(
+        title: event.notification.title,
+        description: event.notification.body,
+        read: false,
+        addedAt: DateTime.now(),
+        postId: id,
+      ),
+    );
+  });
 }
 
 Future<void> initLocalDatabase() async {
@@ -51,4 +80,5 @@ Future<void> initLocalDatabase() async {
   Hive.registerAdapter(PostUioAdapter());
   Hive.registerAdapter(CategoryUioAdapter());
   Hive.registerAdapter(AuthorUioAdapter());
+  Hive.registerAdapter(NotificationUioAdapter());
 }

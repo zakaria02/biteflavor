@@ -1,6 +1,7 @@
 import 'package:biteflavor/presentation/favorites/favorites_page.dart';
 import 'package:biteflavor/presentation/home/home_page.dart';
 import 'package:biteflavor/presentation/main_page.dart';
+import 'package:biteflavor/presentation/notifications/notifications_page.dart';
 import 'package:biteflavor/presentation/post/post_details_page.dart';
 import 'package:biteflavor/presentation/search/search_page.dart';
 import 'package:biteflavor/presentation/settings/settings_page.dart';
@@ -32,6 +33,9 @@ final GlobalKey<NavigatorState> _settingsNavigatorKey =
             ),
             TypedGoRoute<PostsListRoute>(
               path: '/postsList/:title',
+            ),
+            TypedGoRoute<NotificationsRoute>(
+              path: '/notifications',
             ),
           ],
         ),
@@ -169,6 +173,16 @@ class PostsListRoute extends GoRouteData {
         categoryId: categoryId,
         title: title,
       ),
+    );
+  }
+}
+
+// Posts list
+class NotificationsRoute extends GoRouteData {
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return NoTransitionPage(
+      child: NotificationsPage(),
     );
   }
 }

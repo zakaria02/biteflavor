@@ -6,7 +6,7 @@ part of 'posts_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$postsHash() => r'58c9cce3dbb3ef39560d640f1953682252c194d6';
+String _$postsHash() => r'61a3183e5d7657ede51d6584ddef0d66f12dd415';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -173,7 +173,7 @@ class _PostsProviderElement extends FutureProviderElement<List<PostUio>>
   int get count => (origin as PostsProvider).count;
 }
 
-String _$latestHash() => r'b8e70cabfe1f9b0465fd18b53752cf09f9bf666e';
+String _$latestHash() => r'c7e111044a2eef09edd4240432ec2ec17024b0e0';
 
 /// See also [latest].
 @ProviderFor(latest)
@@ -189,7 +189,7 @@ final latestProvider = FutureProvider<List<PostUio>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef LatestRef = FutureProviderRef<List<PostUio>>;
-String _$postDetailsHash() => r'94858c10c2886a1825a97be7a26d71baff020ba6';
+String _$postDetailsHash() => r'6d6ebf9e43b3dea3e9bf32232f6ad5b3fd97bf0b';
 
 /// See also [postDetails].
 @ProviderFor(postDetails)

@@ -66,6 +66,7 @@ dependencies:
   connectivity_plus: ^6.1.1
   flutter_widget_from_html: ^0.15.3
   in_app_review: ^2.0.10
+  flutter_svg: ^2.0.16
 
 dev_dependencies:
   flutter_test:

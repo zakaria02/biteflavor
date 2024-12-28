@@ -6,4 +6,5 @@ class AppImages {
   static const String instagram = "$_path/instagram.png";
   static const String pinterest = "$_path/pinterest.png";
   static const String noData = "$_path/no_data.png";
+  static const String article = "$_path/article.svg";
 }
