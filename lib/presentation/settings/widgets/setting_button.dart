@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SettingButton extends StatelessWidget {
+class SettingButton extends StatefulWidget {
   const SettingButton({
     super.key,
     required this.icon,
@@ -19,9 +21,22 @@ class SettingButton extends StatelessWidget {
   final bool isSwitch;
 
   @override
+  State<SettingButton> createState() => _SettingButtonState();
+}
+
+class _SettingButtonState extends State<SettingButton> {
+  bool notificationsActive = false;
+
+  @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        notificationsActive = OneSignal.Notifications.permission;
+      });
+    });
     return GestureDetector(
-      onTap: onPress ?? () async => await launchUrl(Uri.parse(url!)),
+      onTap:
+          widget.onPress ?? () async => await launchUrl(Uri.parse(widget.url!)),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         margin: const EdgeInsets.only(bottom: 12),
@@ -34,21 +49,27 @@ class SettingButton extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: Colors.grey[100],
               ),
-              child: Icon(icon, size: 22),
+              child: Icon(widget.icon, size: 22),
             ),
             const SizedBox(width: 16),
             Text(
-              title,
+              widget.title,
               style: GoogleFonts.quicksand(
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
               ),
             ),
             const Spacer(),
-            isSwitch
+            widget.isSwitch
                 ? Switch(
-                    value: true,
-                    onChanged: (value) {},
+                    value: notificationsActive,
+                    onChanged: (value) async {
+                      if (value) {
+                        await OneSignal.Notifications.requestPermission(value);
+                      } else {
+                        openAppSettings();
+                      }
+                    },
                     activeTrackColor: Colors.grey[100],
                     activeColor: Colors.green,
                   )

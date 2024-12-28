@@ -4,6 +4,7 @@ import 'package:biteflavor/domain/favorites_controller.dart';
 import 'package:biteflavor/domain/posts_controller.dart';
 import 'package:biteflavor/presentation/post/widget/post_details_view.dart';
 import 'package:biteflavor/uios/post_uio.dart';
+import 'package:biteflavor/utils/constant/app_texts.dart';
 import 'package:biteflavor/utils/extensios/context_extension.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -29,28 +30,20 @@ class _PostDetailsPageState extends ConsumerState<PostDetailsPage> {
   BannerAd? _bannerAd;
   bool _bannerAdLoaded = false;
 
-  final adUnitId = Platform.isIOS
-      ? "ca-app-pub-4667283993751200/3922922428"
-      : "ca-app-pub-4667283993751200/4615119196";
-  final adBannerUnitId = Platform.isIOS
-      ? "ca-app-pub-4667283993751200/6395104720"
-      : "ca-app-pub-4667283993751200/5427575786";
+  final adUnitId =
+      Platform.isIOS ? AppTexts.iosPostUnitAd : AppTexts.androidPostUnitAd;
+  final adBannerUnitId =
+      Platform.isIOS ? AppTexts.iosPostBannerAd : AppTexts.androidPostBannerAd;
 
-  /// Loads an interstitial ad.
   Future<void> loadAd() async {
     await InterstitialAd.load(
         adUnitId: adUnitId,
         request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
-          // Called when an ad is successfully received.
           onAdLoaded: (ad) {
-            debugPrint('$ad loaded.');
             ad.show();
           },
-          // Called when an ad request failed.
-          onAdFailedToLoad: (LoadAdError error) {
-            debugPrint('InterstitialAd failed to load: $error');
-          },
+          onAdFailedToLoad: (LoadAdError error) {},
         ));
   }
 
@@ -60,16 +53,12 @@ class _PostDetailsPageState extends ConsumerState<PostDetailsPage> {
       request: const AdRequest(),
       size: AdSize.fullBanner,
       listener: BannerAdListener(
-        // Called when an ad is successfully received.
         onAdLoaded: (ad) {
           setState(() {
             _bannerAdLoaded = true;
           });
         },
-        // Called when an ad request failed.
         onAdFailedToLoad: (ad, err) {
-          debugPrint('BannerAd failed to load: $err');
-          // Dispose the ad here to free resources.
           ad.dispose();
         },
       ),

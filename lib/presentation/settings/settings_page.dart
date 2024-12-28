@@ -58,6 +58,8 @@ class SettingsPage extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SocialMediaButton(
                 url: AppUrls.facebook,
@@ -67,6 +69,11 @@ class SettingsPage extends StatelessWidget {
               SocialMediaButton(
                 url: AppUrls.instagram,
                 icon: AppImages.instagram,
+              ),
+              SizedBox(width: 16),
+              SocialMediaButton(
+                url: AppUrls.pinterest,
+                icon: AppImages.pinterest,
               )
             ],
           ),

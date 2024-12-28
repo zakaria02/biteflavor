@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:biteflavor/utils/constant/app_texts.dart';
 import 'package:biteflavor/utils/providers/router.dart';
 import 'package:biteflavor/utils/providers/routes.dart';
 import 'package:biteflavor/utils/widgets/bottom_bar_nav.dart';
@@ -22,9 +23,8 @@ class _MainPageState extends ConsumerState<MainPage> {
   BannerAd? _bannerAd;
   bool _bannerAdLoaded = false;
 
-  final adUnitId = Platform.isIOS
-      ? "ca-app-pub-4667283993751200/8013376522"
-      : "ca-app-pub-4667283993751200/4094312813";
+  final adUnitId =
+      Platform.isIOS ? AppTexts.iosBannerAd : AppTexts.androidBannerAd;
 
   void loadAd() async {
     _bannerAd = BannerAd(
@@ -32,16 +32,12 @@ class _MainPageState extends ConsumerState<MainPage> {
       request: const AdRequest(),
       size: AdSize.fullBanner,
       listener: BannerAdListener(
-        // Called when an ad is successfully received.
         onAdLoaded: (ad) {
           setState(() {
             _bannerAdLoaded = true;
           });
         },
-        // Called when an ad request failed.
         onAdFailedToLoad: (ad, err) {
-          debugPrint('BannerAd failed to load: $err');
-          // Dispose the ad here to free resources.
           ad.dispose();
         },
       ),

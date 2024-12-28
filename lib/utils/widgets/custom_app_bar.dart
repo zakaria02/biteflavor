@@ -2,6 +2,7 @@ import 'package:biteflavor/utils/constant/app_colors.dart';
 import 'package:biteflavor/utils/constant/app_images.dart';
 import 'package:biteflavor/utils/constant/app_styles.dart';
 import 'package:biteflavor/utils/constant/app_texts.dart';
+import 'package:biteflavor/utils/providers/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
@@ -15,16 +16,19 @@ class CustomAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            height: 60,
-            width: 60,
-            decoration: BoxDecoration(
-              image: const DecorationImage(
-                image: AssetImage(AppImages.logo),
-              ),
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: AppColors.border,
+          GestureDetector(
+            onTap: () => const HomeRoute().go(context),
+            child: Container(
+              height: 60,
+              width: 60,
+              decoration: BoxDecoration(
+                image: const DecorationImage(
+                  image: AssetImage(AppImages.logo),
+                ),
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: AppColors.border,
+                ),
               ),
             ),
           ),
