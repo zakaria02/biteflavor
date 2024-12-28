@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-4667283993751200~7996160690</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>The app doesn&apos;t need this permissions, please don&apos;t accept it</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>

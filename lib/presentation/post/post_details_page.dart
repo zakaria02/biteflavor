@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:biteflavor/domain/favorites_controller.dart';
 import 'package:biteflavor/domain/posts_controller.dart';
 import 'package:biteflavor/presentation/post/widget/post_details_view.dart';
@@ -27,8 +29,12 @@ class _PostDetailsPageState extends ConsumerState<PostDetailsPage> {
   BannerAd? _bannerAd;
   bool _bannerAdLoaded = false;
 
-  final adUnitId = "ca-app-pub-4667283993751200/4615119196";
-  final adBannerUnitId = 'ca-app-pub-4667283993751200/5427575786';
+  final adUnitId = Platform.isIOS
+      ? "ca-app-pub-4667283993751200/3922922428"
+      : "ca-app-pub-4667283993751200/4615119196";
+  final adBannerUnitId = Platform.isIOS
+      ? "ca-app-pub-4667283993751200/6395104720"
+      : "ca-app-pub-4667283993751200/5427575786";
 
   /// Loads an interstitial ad.
   Future<void> loadAd() async {

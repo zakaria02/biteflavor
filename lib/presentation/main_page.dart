@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:biteflavor/utils/providers/router.dart';
 import 'package:biteflavor/utils/providers/routes.dart';
 import 'package:biteflavor/utils/widgets/bottom_bar_nav.dart';
@@ -20,7 +22,9 @@ class _MainPageState extends ConsumerState<MainPage> {
   BannerAd? _bannerAd;
   bool _bannerAdLoaded = false;
 
-  final adUnitId = 'ca-app-pub-4667283993751200/4094312813';
+  final adUnitId = Platform.isIOS
+      ? "ca-app-pub-4667283993751200/8013376522"
+      : "ca-app-pub-4667283993751200/4094312813";
 
   void loadAd() async {
     _bannerAd = BannerAd(

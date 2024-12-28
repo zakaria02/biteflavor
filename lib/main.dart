@@ -34,8 +34,9 @@ void main() async {
   MobileAds.instance.updateRequestConfiguration(
     RequestConfiguration(
       testDeviceIds: [
-        '7ED5CEE9072BC98CBD4CF5C4B58BA2D5'
-      ], // Replace with your actual test device ID
+        '7ED5CEE9072BC98CBD4CF5C4B58BA2D5', // Android test device
+        "e6e89e0c49562d6cdc067c1584fc5b89" // iOS test device
+      ],
     ),
   );
 
