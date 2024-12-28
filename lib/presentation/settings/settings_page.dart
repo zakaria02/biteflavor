@@ -6,6 +6,7 @@ import 'package:biteflavor/utils/constant/app_urls.dart';
 import 'package:biteflavor/utils/extensios/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:in_app_review/in_app_review.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -24,7 +25,13 @@ class SettingsPage extends StatelessWidget {
         SettingButton(
           icon: EvaIcons.star_outline,
           title: context.l10n.rateApp,
-          onPress: () {},
+          onPress: () async {
+            final InAppReview inAppReview = InAppReview.instance;
+
+            if (await inAppReview.isAvailable()) {
+              inAppReview.requestReview();
+            }
+          },
         ),
         SettingTitle(title: context.l10n.ourLinks),
         SettingButton(
