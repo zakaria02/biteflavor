@@ -67,6 +67,7 @@ dependencies:
   flutter_widget_from_html: ^0.15.3
   in_app_review: ^2.0.10
   flutter_svg: ^2.0.16
+  html: ^0.15.5
 
 dev_dependencies:
   flutter_test:

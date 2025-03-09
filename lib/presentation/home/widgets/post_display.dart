@@ -15,9 +15,16 @@ class PostDisplay extends StatelessWidget {
       onTap: () => PostDetailsRoute(postId: post.id ?? 0).push(context),
       child: Stack(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16.0),
-            child: Image.network(post.picture ?? ""),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16.0),
+              image: DecorationImage(
+                image: NetworkImage(
+                  post.picture ?? "",
+                ),
+                fit: BoxFit.fitWidth,
+              ),
+            ),
           ),
           Container(
             height: 190,
